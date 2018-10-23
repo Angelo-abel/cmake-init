@@ -14,10 +14,18 @@ matrix:
     - os: osx
       osx_image: xcode9.1
       env: CMAKE_CONFIGURATION=debug BUILD_DIR=build-debug
+      addons:
+        apt:
+          packages:
+          - qtbase5-dev
 
     - os: linux
       compiler: clang
       env: CMAKE_CONFIGURATION=release BUILD_DIR=build
+      addons:
+        apt:
+          packages:
+          - qtbase5-dev
 
     - os: linux
       compiler: clang
@@ -35,6 +43,7 @@ matrix:
           packages:
           - cmake
           - g++-5
+          - qtbase5-dev
 
     - os: linux
       compiler: gcc
@@ -48,6 +57,7 @@ matrix:
           packages:
           - cmake
           - g++-5
+          - qtbase5-dev
 
     - os: windows
       env:
