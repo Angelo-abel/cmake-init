@@ -13,10 +13,10 @@ set(META_PROJECT_NAME "template")
 project("${META_PROJECT_NAME}-tests" C CXX)
 
 # Set policies
-set_policy(CMP0054 NEW) # ENABLE  CMP0054: Only interpret if() arguments as variables or keywords when unquoted.
-set_policy(CMP0042 NEW) # ENABLE  CMP0042: MACOSX_RPATH is enabled by default.
-set_policy(CMP0063 NEW) # ENABLE  CMP0063: Honor visibility properties for all target types.
-set_policy(CMP0037 OLD) # DISABLE CMP0037: Target names should not be reserved and should match a validity pattern.
+set_policy(CMP0054 NEW) # ENABLE CMP0054: Only interpret if() arguments as variables or keywords when unquoted.
+set_policy(CMP0042 NEW) # ENABLE CMP0042: MACOSX_RPATH is enabled by default.
+set_policy(CMP0063 NEW) # ENABLE CMP0063: Honor visibility properties for all target types.
+set_policy(CMP0037 NEW) # ENABLE CMP0037: Target names should not be reserved and should match a validity pattern.
 
 # Compiler settings and options
 
@@ -54,22 +54,7 @@ set(gtest_disable_pthreads      OFF CACHE BOOL "")
 set(gtest_force_shared_crt      ON  CACHE BOOL "")
 set(gtest_hide_internal_symbols OFF CACHE BOOL "")
 
-add_subdirectory(googletest/googlemock)
-
-# Create interface library to link against gmock
-add_library(gmock-dev INTERFACE)
-
-target_include_directories(gmock-dev
-    SYSTEM INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/googletest/googletest/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/googletest/googlemock/include
-)
-
-target_link_libraries(gmock-dev
-    INTERFACE
-    gmock
-)
-
+find_package(gmock REQUIRED)
 
 # 
 # Target 'test'
